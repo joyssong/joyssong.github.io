@@ -1,13 +1,11 @@
 ---
-layout: post
 title: "Postman - csv 와 Runner를 이용한 API 테스트 자동화"
 categories:
  - API테스트자동화
 tags:
  - [postman, 포스트맨, api테스트자동화]
 toc: true
-date: 2023-09-03 22:30:00
-
+date: 2023-09-03T22:30:00+09:00
 ---
 
 <h3 id="소개">소개</h3>
