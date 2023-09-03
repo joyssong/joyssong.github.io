@@ -71,6 +71,8 @@ algolia:
 google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
+future: true
+
 # SEO Related
 google_site_verification : ilynKW5fF8-XdYaDBQVcyLFa_ik1WYEogATuwgMiYHI
 bing_site_verification   :
