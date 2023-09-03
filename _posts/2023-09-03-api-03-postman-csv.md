@@ -41,7 +41,7 @@ date: 2023-09-03T22:30:00+09:00
 </table><p>원래의 key값과 동일하게 하면 편하다.</p>
 <h2 id="단계---csv에-데이터-입력">2단계 - csv에 데이터 입력</h2>
 <p>사용하는 컴퓨터에 엑셀이 없어서 구글 스프레드시트에서 생성 후 csv로 다운로드를 하였다.</p>
-<p>==헤더에 해당하는 행에 Postman의 Body에 적었던 변수명을 입력하고, 그 아래에는 입력할 데이터를 넣으면 된다. ==<br>
+<p><mark>헤더에 해당하는 행에 Postman의 Body에 적었던 변수명을 입력하고, 그 아래에는 입력할 데이터를 넣으면 된다.</mark><br>
 <strong>데이터를 넣을 때, String이라면 “” 로 감싸줘야 한다.</strong></p>
 <p>맨 왼쪽에 num 은 데이터 개수를 세기 위해 일부러 넣은 값이다.</p>
 
@@ -77,13 +77,13 @@ date: 2023-09-03T22:30:00+09:00
 <p>이 때, <code>JSON.stringfy</code> 를 해줘야 String 형식으로 불러오므로 에러가 나지 않는다.</p>
 <h2 id="단계---runner로-수행">3단계 - Runner로 수행</h2>
 <p>Body 자체로는 어디서 데이터를 읽어와야하는지 모르므로 수행할 수 없다.<br>
-Postman 하단에 보면 Runner, Start Proxy, Cookies 등 버튼이 있는데 여기서 <strong>Runner</strong> 을 클릭한다.</p>
+Postman 하단에 보면 Runner, Start Proxy, Cookies 등 버튼이 있는데 여기서 <mark>Runner 을 클릭</mark>한다.</p>
 <p><strong>Runner</strong> 는 여러 request를 한 번에 수행하게 해주는 기능이다.<br>
 (최근 유료화가 강해지면서 Runner을 하루에 25회만 돌릴 수 있게 바뀌었다.)</p>
 <p>Runner에 진입 후, drag and drop으로 원하는 collection (폴더 단위) 를 불러오고 체크/언체크를 해준다.</p>
 <p>지금은 1개만 돌리지만, 실제 테스트를 할때는 위에 기입한 것과 같이 여러 API를 돌릴때가 더 많다.</p>
 <p>오른쪽의 Run Configuration을 보자.</p>
-<p>먼저 Data &gt; Select File로 아까 생성한 csv를 선택한다.</p>
+<p>먼저 <mark>Data &gt; Select File로 아까 생성한 csv를 선택</mark>한다.</p>
 
 <table>
 <thead>
@@ -96,7 +96,7 @@ Postman 하단에 보면 Runner, Start Proxy, Cookies 등 버튼이 있는데 �
 이게 testcase 의 개수가 된다.<br>
 만약 전체가 아닌 일부를 돌리고 싶다면 원하는 개수만큼 바꾸면 된다.</p>
 <p>Data File Type 도 text/csv로 자동 선택되고, 옆에 Preview 버튼을 통해 데이터가 어떻게 생겼는지 볼 수 있다.</p>
-<p>이후 Run SwaggerPetstore 을 누르면 된다.<br>
+<p>이후 <mark>Run SwaggerPetstore 을 클릭</mark>하면 된다.<br>
 <strong>주의! Run 하기 전 Request 파일들을 모두 저장해주어야 한다.</strong></p>
 <p>아래와 같이 결과가 나온다!</p>
 
