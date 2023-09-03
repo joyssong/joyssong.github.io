@@ -18,24 +18,52 @@ date: 2023-09-03T22:30:00+09:00
 앞으로는 csv를 활용해보자.</p>
 <h2 id="단계---파라메터의-변수화">1단계 - 파라메터의 변수화</h2>
 <p><a href="https://petstore.swagger.io/#/">Swagger Petstore</a> 의 POST /user 을 예로 들었다.</p>
-<p>1명의 user를 등록하기 위해서는 body에 아래와 같이 입력해야한다.<br>
-<img src="/assets/images/postman_csv_01.png" alt="csv_01"></p>
-<p>만약 수십명의 user를 등록해야한다면, 이렇게 하나 입력하고 send하고, 또 하나 입력하고 send 하고를 반복해야할까?</p>
+<p>1명의 user를 등록하기 위해서는 body에 아래와 같이 입력해야한다.</p>
+
+<table>
+<thead>
+<tr>
+<th><img src="/assets/images/postman_csv_01.png" alt="csv_01"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><p>만약 수십명의 user를 등록해야한다면, 이렇게 하나 입력하고 send하고, 또 하나 입력하고 send 하고를 반복해야할까?</p>
 <p>그렇지않다.</p>
-<p><mark>Body 에서 변수처리하고 싶은 부분을 {{  }} 로 감싸고 변수명을 입력한다.</mark><br>
-<img src="/assets/images/postman_csv_02.png" alt="csv_02"></p>
-<p>원래의 key값과 동일하게 하면 편하다.</p>
+<p><mark>Body 에서 변수처리하고 싶은 부분을 {{  }} 로 감싸고 변수명을 입력한다.</mark></p>
+
+<table>
+<thead>
+<tr>
+<th><img src="/assets/images/postman_csv_02.png" alt="csv_02"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><p>원래의 key값과 동일하게 하면 편하다.</p>
 <h2 id="단계---csv에-데이터-입력">2단계 - csv에 데이터 입력</h2>
 <p>사용하는 컴퓨터에 엑셀이 없어서 구글 스프레드시트에서 생성 후 csv로 다운로드를 하였다.</p>
 <p>==헤더에 해당하는 행에 Postman의 Body에 적었던 변수명을 입력하고, 그 아래에는 입력할 데이터를 넣으면 된다. ==<br>
 <strong>데이터를 넣을 때, String이라면 “” 로 감싸줘야 한다.</strong></p>
-<p>맨 왼쪽에 num 은 데이터 개수를 세기 위해 일부러 넣은 값이다.<br>
-<img src="/assets/images/postman_csv_03.png" alt="csv_03"></p>
-<p>이렇게 csv와 Postman의 Body에 동일하게 이름을 넣으면 별다른 사전조건없이도 알아서 1열부터 데이터를 읽어온다.</p>
+<p>맨 왼쪽에 num 은 데이터 개수를 세기 위해 일부러 넣은 값이다.</p>
+
+<table>
+<thead>
+<tr>
+<th><img src="/assets/images/postman_csv_03.png" alt="csv_03"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><p>이렇게 csv와 Postman의 Body에 동일하게 이름을 넣으면 별다른 사전조건없이도 알아서 1열부터 데이터를 읽어온다.</p>
 <h3 id="여기서-잠깐-csv-데이터에서--를-안-넣고싶다면"><strong>여기서 잠깐, csv 데이터에서 " 를 안 넣고싶다면?</strong></h3>
-<p>데이터를  " 로 감싸는게 귀찮다면, 아래 방법이 있다.<br>
-<img src="/assets/images/postman_csv_06.png" alt="csv_06"><br>
-위 이미지에서는 username을 " 로 감싸지않고 데이터만 입력하였다.<br>
+<p>데이터를  " 로 감싸는게 귀찮다면, 아래 방법이 있다.</p>
+
+<table>
+<thead>
+<tr>
+<th><img src="/assets/images/postman_csv_06.png" alt="csv_06"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><p>위 이미지에서는 username을 " 로 감싸지않고 데이터만 입력하였다.<br>
 (단, csv는 , (쉼표) 로 데이터를 구분하니 데이터에 , 가 포함되면 안된다)</p>
 <p>Postman으로 돌아와 Body 옆의 <strong>Pre-request Script</strong>로 이동한다.<br>
 여기서 아래와 같이 입력한다.</p>
@@ -55,17 +83,31 @@ Postman 하단에 보면 Runner, Start Proxy, Cookies 등 버튼이 있는데 �
 <p>Runner에 진입 후, drag and drop으로 원하는 collection (폴더 단위) 를 불러오고 체크/언체크를 해준다.</p>
 <p>지금은 1개만 돌리지만, 실제 테스트를 할때는 위에 기입한 것과 같이 여러 API를 돌릴때가 더 많다.</p>
 <p>오른쪽의 Run Configuration을 보자.</p>
-<p>먼저 Data &gt; Select File로 아까 생성한 csv를 선택한다.<br>
-<img src="/assets/images/postman_csv_04.png" alt="csv_04"></p>
-<p>파일을 선택하면 Iterations에 수행할 개수가 저절로 나온다.<br>
+<p>먼저 Data &gt; Select File로 아까 생성한 csv를 선택한다.</p>
+
+<table>
+<thead>
+<tr>
+<th><img src="/assets/images/postman_csv_04.png" alt="csv_04"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><p>파일을 선택하면 Iterations에 수행할 개수가 저절로 나온다.<br>
 이게 testcase 의 개수가 된다.<br>
 만약 전체가 아닌 일부를 돌리고 싶다면 원하는 개수만큼 바꾸면 된다.</p>
 <p>Data File Type 도 text/csv로 자동 선택되고, 옆에 Preview 버튼을 통해 데이터가 어떻게 생겼는지 볼 수 있다.</p>
 <p>이후 Run SwaggerPetstore 을 누르면 된다.<br>
 <strong>주의! Run 하기 전 Request 파일들을 모두 저장해주어야 한다.</strong></p>
-<p>아래와 같이 결과가 나온다!<br>
-<img src="/assets/images/postman_csv_05.png" alt="csv_05"></p>
-<p>5개의 iteration을 돌렸고, 아직 본격적으로 test를 한 것은 없으므로 All tests 는 0으로 나온다.<br>
+<p>아래와 같이 결과가 나온다!</p>
+
+<table>
+<thead>
+<tr>
+<th><img src="/assets/images/postman_csv_05.png" alt="csv_05"></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table><p>5개의 iteration을 돌렸고, 아직 본격적으로 test를 한 것은 없으므로 All tests 는 0으로 나온다.<br>
 대신, 모든 항목이 200ok 로 나왔음을 알 수 있다.</p>
 <h2 id="csv--runner-조합-활용법">csv + Runner 조합 활용법</h2>
 <p>이렇게 csv와 Runner을 이용하면, 하나의 API Request + 하나의 csv파일로 수천개의 응답을 만들어 낼 수 있다.</p>
