@@ -2,8 +2,10 @@
 main:
   - title: "블로그 방문하기"
     url: https://joyssong.github.io
+  - title : "Categories"
+    url: /categories/
   - title: "About"
-    url: https://joyssong.github.io/about/
+    url: /about/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
