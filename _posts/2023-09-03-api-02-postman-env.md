@@ -1,12 +1,11 @@
 ---
-layout: post
 title: "Postman - Environment 환경설정 방법"
 categories:
  - API테스트자동화
 tags:
  - [postman, 포스트맨, api테스트자동화]
 toc: true
-date: 2023-09-03 20:00:48
+date: 2023-09-03T20:00:00+09:00
 
 ---
 
