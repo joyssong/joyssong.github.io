@@ -19,8 +19,8 @@ locale                   : "ko-KR"
 title                    : "QA 조이의 흔적"
 title_separator          : "-"
 subtitle                 : "웹/모바일 QA를 하며 경험하고 배운 이야기를 남깁니다."
-name                     : "빨리 배포하고 놀고싶은 SW QA"
-description              : "SW QA, 웹 QA, SDET, Test Engineer, Tester, Software Verification ..."
+name                     : "놀고싶은 QA"
+description              : "QA, SDET, Test Engineer 그 어딘가"
 url                      : "https://joyssong.github.io."
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -104,8 +104,8 @@ analytics:
 
 # Site Author
 author:
-  name             : "빨리 배포하고 놀고싶은 SW QA"
-  avatar           : "/assets/images/고양이.png"
+  name             : "놀고싶은 QA"
+  avatar           : "/assets/images/cat.png"
   bio              : "SW QA, 웹 QA, SDET, Test Engineer, Tester, Software Verification ..."
   location         : "South Korea"
   email            :
