@@ -17,17 +17,15 @@ date: 2023-09-03T22:30:00+09:00
 <p>Postman을 사용하면서 이를 모르는 개발자, QA도 생각보다 많았다.<br>
 앞으로는 csv를 활용해보자.</p>
 <h2 id="단계---파라메터의-변수화">1단계 - 파라메터의 변수화</h2>
-<hr>
 <p><a href="https://petstore.swagger.io/#/">Swagger Petstore</a> 의 POST /user 을 예로 들었다.</p>
 <p>1명의 user를 등록하기 위해서는 body에 아래와 같이 입력해야한다.<br>
-<img src="/assets/images/postman_csv_01.png" alt="csv_01"></p>
+<img src="/assets/images/postman_csv_01.png" alt="csv_01">{:style=“border:1px solid #0a0a0a; padding: 0px;” }</p>
 <p>만약 수십명의 user를 등록해야한다면, 이렇게 하나 입력하고 send하고, 또 하나 입력하고 send 하고를 반복해야할까?<br>
 그렇지않다.</p>
 <p>Body 에서 변수처리하고 싶은 부분을 {{ }} 로 감싸고 변수명을 입력한다.<br>
-<img src="/assets/images/postman_csv_02.png" alt="csv_02"></p>
+<img src="/assets/images/postman_csv_02.png" alt="csv_02">{:style="border:1px solid #0a0a0a;  }</p>
 <p>원래의 key값과 동일하게 하면 편하다.</p>
 <h2 id="단계---csv에-데이터-입력">2단계 - csv에 데이터 입력</h2>
-<hr>
 <p>사용하는 컴퓨터에 엑셀이 없어서 구글 스프레드시트에서 생성 후 csv로 다운로드를 하였다.</p>
 <p>파일의 맨 위에 Postman의 Body에 적었던 변수명을 입력하고, 그 아래에는 입력할 데이터를 넣으면 된다.<br>
 데이터를 넣을 때, String이라면 “” 로 감싸줘야 한다.</p>
@@ -50,7 +48,6 @@ date: 2023-09-03T22:30:00+09:00
 <p><code>pm.iterations.get("C")</code> 는 이터레이션을 수행할 csv에서 C 라는 이름을 가진 열의 데이터를 불러온다.</p>
 <p>이 때, <code>JSON.stringfy</code> 를 해줘야 String 형식으로 불러오므로 에러가 나지 않는다.</p>
 <h2 id="단계---runner로-수행">3단계 - Runner로 수행</h2>
-<hr>
 <p>Body 자체로는 어디서 데이터를 읽어와야하는지 모르므로 수행할 수 없다.<br>
 Postman 하단에 보면 Runner, Start Proxy, Cookies 등 버튼이 있는데 여기서 <strong>Runner</strong> 을 클릭한다.</p>
 <p><strong>Runner</strong> 는 여러 request를 한 번에 수행하게 해주는 기능이다.<br>
@@ -71,7 +68,6 @@ Postman 하단에 보면 Runner, Start Proxy, Cookies 등 버튼이 있는데 �
 <p>5개의 iteration을 돌렸고, 아직 본격적으로 test를 한 것은 없으므로 All tests 는 0으로 나온다.<br>
 대신, 모든 항목이 200ok 로 나왔음을 알 수 있다.</p>
 <h2 id="csv--runner-조합-활용법">csv + Runner 조합 활용법</h2>
-<hr>
 <p>이렇게 csv와 Runner을 이용하면, 하나의 API Request + 하나의 csv파일로 수천개의 응답을 만들어 낼 수 있다.</p>
 <p>예를 들면 CRUD 기본 동작을 이용해 Backend Regression Tet를 할 수 있다.  아이템을 생성하고(POST), 조회하고(GET), 업데이트(PUT) 후 삭제(DELETE)하는 4개의 API를 준비한다.</p>
 <p>아이템 생성시에는 각 변수마다 true / false / null 값을 넣고 Response 을 확인한다.</p>
