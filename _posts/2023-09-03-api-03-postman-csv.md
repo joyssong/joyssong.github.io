@@ -19,16 +19,16 @@ date: 2023-09-03T22:30:00+09:00
 <h2 id="단계---파라메터의-변수화">1단계 - 파라메터의 변수화</h2>
 <p><a href="https://petstore.swagger.io/#/">Swagger Petstore</a> 의 POST /user 을 예로 들었다.</p>
 <p>1명의 user를 등록하기 위해서는 body에 아래와 같이 입력해야한다.<br>
-<img src="/assets/images/postman_csv_01.png" alt="csv_01">{:style=“border:1px solid #0a0a0a; padding: 0px;” }</p>
-<p>만약 수십명의 user를 등록해야한다면, 이렇게 하나 입력하고 send하고, 또 하나 입력하고 send 하고를 반복해야할까?<br>
-그렇지않다.</p>
-<p>Body 에서 변수처리하고 싶은 부분을 {{ }} 로 감싸고 변수명을 입력한다.<br>
-<img src="/assets/images/postman_csv_02.png" alt="csv_02">{:style="border:1px solid #0a0a0a;  }</p>
+<img src="/assets/images/postman_csv_01.png" alt="csv_01"></p>
+<p>만약 수십명의 user를 등록해야한다면, 이렇게 하나 입력하고 send하고, 또 하나 입력하고 send 하고를 반복해야할까?</p>
+<p>그렇지않다.</p>
+<p><mark>Body 에서 변수처리하고 싶은 부분을 {{  }} 로 감싸고 변수명을 입력한다.</mark><br>
+<img src="/assets/images/postman_csv_02.png" alt="csv_02"></p>
 <p>원래의 key값과 동일하게 하면 편하다.</p>
 <h2 id="단계---csv에-데이터-입력">2단계 - csv에 데이터 입력</h2>
 <p>사용하는 컴퓨터에 엑셀이 없어서 구글 스프레드시트에서 생성 후 csv로 다운로드를 하였다.</p>
-<p>파일의 맨 위에 Postman의 Body에 적었던 변수명을 입력하고, 그 아래에는 입력할 데이터를 넣으면 된다.<br>
-데이터를 넣을 때, String이라면 “” 로 감싸줘야 한다.</p>
+<p>==헤더에 해당하는 행에 Postman의 Body에 적었던 변수명을 입력하고, 그 아래에는 입력할 데이터를 넣으면 된다. ==<br>
+<strong>데이터를 넣을 때, String이라면 “” 로 감싸줘야 한다.</strong></p>
 <p>맨 왼쪽에 num 은 데이터 개수를 세기 위해 일부러 넣은 값이다.<br>
 <img src="/assets/images/postman_csv_03.png" alt="csv_03"></p>
 <p>이렇게 csv와 Postman의 Body에 동일하게 이름을 넣으면 별다른 사전조건없이도 알아서 1열부터 데이터를 읽어온다.</p>
