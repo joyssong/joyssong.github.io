@@ -55,14 +55,14 @@ pm.test 를 하면 테스트 결과가 Pass/Fail로 나오게되는데 아래 �
 <p>하지만 성공 케이스라도 항상 200 으로 나오는 건 아니다. 간혹 201, 202로 나오기도 하기 때문이다.</p>
 <p>그럴때는 아래 방법을 이용하자.</p>
 <h3 id="여러개의-응답코드-확인하기">2) 여러개의 응답코드 확인하기</h3>
-<p>Snipet에서 <code>Status code : Successful POST request</code>을 클릭하자.</p>
+<p>Snippets에서 <code>Status code : Successful POST request</code>을 클릭하자.</p>
 <p>아래의 코드가 추가된다.</p>
 <pre class=" language-javascript"><code class="prism  language-javascript"> pm<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Successful POST request"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
    pm<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span>pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span>code<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span>be<span class="token punctuation">.</span><span class="token function">oneOf</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">201</span><span class="token punctuation">,</span> <span class="token number">202</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>pm.test 로 시작하는 구성은 아까와 동일하다.<br>
-테스트할 내용이 아까와 달라졌다. [201, 202] 라는 배열이 추가되었다. 이 배열에 200을 추가하면 1)의 테스트까지 커버할 수 있다.</p>
+테스트할 내용이 아까와 달라지고, [201, 202] 라는 배열이 추가되었다. 이 배열에 200을 추가하면 1)의 테스트까지 커버할 수 있다.</p>
 <p>이렇게 두개의 테스트케이스를 추가하고 호출해보면, 아래와 같이 결과가 나온다.</p>
 
 <table>
@@ -72,7 +72,7 @@ pm.test 를 하면 테스트 결과가 Pass/Fail로 나오게되는데 아래 �
 </tr>
 </thead>
 <tbody></tbody>
-</table><h2 id="api-response-body-데이터-검증하기">API Response Body 데이터 검증하기</h2>
+</table><h2 id="단계---api-response-body-데이터-검증하기">3단계 - API Response Body 데이터 검증하기</h2>
 <p>이제는 Body를 검증할 차례이다. 역시 Snippets 을 적극 활용할 예정이다.</p>
 <p>위에서 CreateUser 를 호출하고 아래의 Body 를 받았다.</p>
 <pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
@@ -107,7 +107,7 @@ pm<span class="token punctuation">.</span><span class="token function">test</spa
   pm<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span>pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span><span class="token function">include</span><span class="token punctuation">(</span><span class="token string">"unknown"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>내용을 조금 바꿔보았다. 여기서는 Response body에 “unknown” 이란 단어가 있다면 Pass가 된다.</p>
+<p>여기서는 Response body에 “unknown” 이란 단어가 있다면 Pass가 된다.</p>
 <p>데이터의 위치를 정확히 파악하기 어려울 때, 혹은 데이터의 위치가 유동적일 때 사용하면 좋겠다.</p>
 <h3 id="response-body--json-value-check">2) Response Body : JSON Value Check</h3>
 <p>개인적으로 제일 많이 사용하는 구문이다.</p>
@@ -140,7 +140,7 @@ pm<span class="token punctuation">.</span><span class="token function">test</spa
 </code></pre>
 <p>이렇게 하면 Tests는 고정시키고, Pre-request Script만 바꾸면서 테스트를 할 수 있다.</p>
 <p>사실 업무에선 응답이 위 처럼 단순하지 않은 경우가 더 많다. 그런 경우를 대비해 아래에 <strong>다양한 Response Body  구조에서 데이터 읽어오기</strong> 를 적어두었다.</p>
-<h2 id="response-body--is-equal-to-a-string">3) Response Body : Is equal to a string</h2>
+<h3 id="response-body--is-equal-to-a-string">3) Response Body : Is equal to a string</h3>
 <p>위와 다르게 응답을 아예 통째로 검증하는 방법이다. 응답이 단순한 경우에는 유용하다.</p>
 <pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">let</span>  body_expected  <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
@@ -157,7 +157,7 @@ pm<span class="token punctuation">.</span><span class="token function">test</spa
 <p>사실 업무에서 써본적이 거의 없는 구문이다.</p>
 <p>이 밖에도 다양한 Snippets이 있다. 응답속도 검증, 헤더검증 등등!<br>
 내가 업무에서 쓰는것은 응답코드 확인(1) 2) 둘 다)과 Body 확인시는 2)를 많이 사용한다.</p>
-<h2 id="테스트-결과-확인하기">테스트 결과 확인하기!</h2>
+<h2 id="단계---테스트-결과-확인하기">4단계 - 테스트 결과 확인하기</h2>
 <p>이렇게 총 6개의 테스트케이스를 생성해보았다.<br>
 수행하고 나면 아래와 같이 보인다.</p>
 
