@@ -42,14 +42,18 @@ API 설계시 응답에 담기도록 정해둔 데이터가 출력된다. Body�
 </thead>
 <tbody></tbody>
 </table><p>여기서 <code>Status code : Code is 200</code> 을 선택하면, Tests 에 자동으로 아래 코드가 입력된다.</p>
-<pre class=" language-javascript"><code class="prism  language-javascript">  pm<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Status code is 200"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span>to<span class="token punctuation">.</span>have<span class="token punctuation">.</span><span class="token function">status</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+
+```js
+pm.test("Status code is 200", function () {
+  pm.response.to.have.status(200);
+  });
+```
 <p>pm. 은 postman의 약자이다.<br>
 pm.test 를 하면 테스트 결과가 Pass/Fail로 나오게되는데 아래 구성으로 되어있다.</p>
-<pre><code>pm.test( "결과에 노출할 테스트 케이스", function() { "테스트할 내용" });
-</code></pre>
+
+```js
+pm.test( "결과에 노출할 테스트 케이스", function() { "테스트할 내용" });
+```
 <p>사실 이 구조의 반복이다.</p>
 <p>위 코드에서는 <code>pm.response.to.have.status(200)</code>을 통해 status 가 200 인지 확인한다. 200 말고 원하는 응답코드로 변경하여 테스트도 가능하다.</p>
 <p>하지만 성공 케이스라도 항상 200 으로 나오는 건 아니다. 간혹 201, 202로 나오기도 하기 때문이다.</p>
@@ -57,10 +61,12 @@ pm.test 를 하면 테스트 결과가 Pass/Fail로 나오게되는데 아래 �
 <h3 id="여러개의-응답코드-확인하기">2) 여러개의 응답코드 확인하기</h3>
 <p>Snippets에서 <code>Status code : Successful POST request</code>을 클릭하자.</p>
 <p>아래의 코드가 추가된다.</p>
-<pre class=" language-javascript"><code class="prism  language-javascript"> pm<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Successful POST request"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   pm<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span>pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span>code<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span>be<span class="token punctuation">.</span><span class="token function">oneOf</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">201</span><span class="token punctuation">,</span> <span class="token number">202</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+
+```js
+pm.test("Successful POST request", function () {
+  pm.expect(pm.response.code).to.be.oneOf([201, 202]);
+  });
+```
 <p>pm.test 로 시작하는 구성은 아까와 동일하다.<br>
 테스트할 내용이 아까와 달라지고, [201, 202] 라는 배열이 추가되었다. 이 배열에 200을 추가하면 1)의 테스트까지 커버할 수 있다.</p>
 <p>이렇게 두개의 테스트케이스를 추가하고 호출해보면, 아래와 같이 결과가 나온다.</p>
@@ -75,21 +81,19 @@ pm.test 를 하면 테스트 결과가 Pass/Fail로 나오게되는데 아래 �
 </table><h2 id="단계---api-response-body-데이터-검증하기">3단계 - API Response Body 데이터 검증하기</h2>
 <p>이제는 Body를 검증할 차례이다. 역시 Snippets 을 적극 활용할 예정이다.</p>
 <p>위에서 CreateUser 를 호출하고 아래의 Body 를 받았다.</p>
-<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
-<span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
-<span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"unknown"</span><span class="token punctuation">,</span>
-<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"200910"</span>
-<span class="token punctuation">}</span>
-</code></pre>
+
+```js
+{
+  "code": 200,
+  "type": "unknown",
+  "message": "200910"
+}
+```
 <p>여러 방법이 있겠지만 가장 쉽고 간단한 3가지 방법을 소개하려한다.</p>
 <ol>
 <li>Response Body : Contain String</li>
 <li>Response Body : JSON Value Check</li>
-<li>
-<ol start="3">
 <li>Response Body : Is equal to a string</li>
-</ol>
-</li>
 </ol>
 <p>아래 이미지는 미리보기!</p>
 
@@ -102,23 +106,27 @@ pm.test 를 하면 테스트 결과가 Pass/Fail로 나오게되는데 아래 �
 <tbody></tbody>
 </table><h3 id="response-body--contain-string">1) Response Body : Contain String</h3>
 <p>응답의 어디든 특정 String이 있으면 Pass를 낸다.</p>
-<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// Body 검증 1 - Contain String</span>
-pm<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Verify contain 'unknown'"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  pm<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span>pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span><span class="token function">include</span><span class="token punctuation">(</span><span class="token string">"unknown"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+
+```js
+// Body 검증 1 - Contain String
+pm.test("Verify contain 'unknown'", function () {
+  pm.expect(pm.response.text()).to.include("unknown");
+  });
+```
 <p>여기서는 Response body에 “unknown” 이란 단어가 있다면 Pass가 된다.</p>
 <p>데이터의 위치를 정확히 파악하기 어려울 때, 혹은 데이터의 위치가 유동적일 때 사용하면 좋겠다.</p>
 <h3 id="response-body--json-value-check">2) Response Body : JSON Value Check</h3>
 <p>개인적으로 제일 많이 사용하는 구문이다.</p>
 <p>API 결과는 거의 항상 JSON 데이터로 나오는데, map 처럼 key : value로 구성되어 있다.<br>
 그래서 데이터의 key값에 원하는 value가 나왔는지 정확하게 확인할 수 있기에 제일 많이 사용한다.</p>
-<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// Body 검증 2 - JSON Value Check</span>
-pm<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Verify created id"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">var</span>  id_result  <span class="token operator">=</span>  pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>message<span class="token punctuation">;</span>
-  pm<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span>id_result<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span><span class="token function">eql</span><span class="token punctuation">(</span><span class="token string">"200919"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+
+```js
+// Body 검증 2 - JSON Value Check
+pm.test("Verify created id", function () {
+  var  id_result  =  pm.response.json().message;
+  pm.expect(id_result).to.eql("200919");
+});
+```
 <p><code>pm.response.json().~~</code> 을 이용하면 원하는 데이터를 정확하게 불러올 수 있다.<br>
 위 응답에서는 “message” 라는 key의 value를 얻어오기 위해 <code>pm.response.json().message</code> 의 값을 <code>id_result</code> 에 넣어주었다.</p>
 <p>이후 <code>pm.expect(id_result).to.eql("200919")</code> 구문으로 <code>id_result</code> (결과값)이 “200919” (예상값)과 동일한지 비교한다.</p>
@@ -128,31 +136,38 @@ pm<span class="token punctuation">.</span><span class="token function">test</spa
 이 방법은 다음 포스팅에서 좀 더 상세히 작성 할 예정이다.</p>
 <p>혹은 collection variable, environment variable, glolbal variable 등과 비교할 수도 있다.</p>
 <p><strong>Pre-request Script</strong> 에 아래와 같이 미리 collection variable을 설정한다.</p>
-<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">let</span>  user_id  <span class="token operator">=</span>  <span class="token string">"200919"</span>
-pm<span class="token punctuation">.</span>collectionVariables<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span><span class="token string">"user_id"</span><span class="token punctuation">,</span> user_id<span class="token punctuation">)</span>
-</code></pre>
+
+```js
+let  user_id  =  "200919"
+pm.collectionVariables.set("user_id", user_id)
+```
 <p>이후 <strong>Tests</strong> 에서 아래와 같이 비교할 수 있다.</p>
-<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// Body 검증 2 - JSON Value Check 응용. Pre-request Script 변수와 비교</span>
-pm<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Verify created id - collection variable"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">var</span>  id_result  <span class="token operator">=</span>  pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>message<span class="token punctuation">;</span>
-  pm<span class="token punctuation">.</span><span class="token function">expect</span><span class="token punctuation">(</span>id_result<span class="token punctuation">)</span><span class="token punctuation">.</span>to<span class="token punctuation">.</span><span class="token function">eql</span><span class="token punctuation">(</span>pm<span class="token punctuation">.</span>collectionVariables<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"user_id"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+
+```js
+// Body 검증 2 - JSON Value Check 응용. Pre-request Script 변수와 비교
+pm.test("Verify created id - collection variable", function () {
+  var  id_result  =  pm.response.json().message;
+  pm.expect(id_result).to.eql(pm.collectionVariables.get("user_id"));
+});
+```
 <p>이렇게 하면 Tests는 고정시키고, Pre-request Script만 바꾸면서 테스트를 할 수 있다.</p>
 <p>사실 업무에선 응답이 위 처럼 단순하지 않은 경우가 더 많다. 그런 경우를 대비해 아래에 <strong>다양한 Response Body  구조에서 데이터 읽어오기</strong> 를 적어두었다.</p>
 <h3 id="response-body--is-equal-to-a-string">3) Response Body : Is equal to a string</h3>
 <p>위와 다르게 응답을 아예 통째로 검증하는 방법이다. 응답이 단순한 경우에는 유용하다.</p>
-<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">let</span>  body_expected  <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
-  <span class="token string">"type"</span><span class="token punctuation">:</span> <span class="token string">"unknown"</span><span class="token punctuation">,</span>
-  <span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"200919"</span>
-<span class="token punctuation">}</span>
 
-<span class="token comment">// Body 검증 3 - Is equal to a string</span>
-pm<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token string">"Body has '200'"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  pm<span class="token punctuation">.</span>response<span class="token punctuation">.</span>to<span class="token punctuation">.</span>have<span class="token punctuation">.</span><span class="token function">body</span><span class="token punctuation">(</span>body_expected<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+```js
+let  body_expected  = {
+  "code": 200,
+  "type": "unknown",
+  "message": "200919"
+}
+
+// Body 검증 3 - Is equal to a string
+pm.test("Body has '200'", function () {
+  pm.response.to.have.body(body_expected);
+  });
+```
+
 <p>Body를 통째로 검증하므로 미리 예상값(body_expected) 를 선언해주는게 코드가 깔끔하다.</p>
 <p>사실 업무에서 써본적이 거의 없는 구문이다.</p>
 <p>이 밖에도 다양한 Snippets이 있다. 응답속도 검증, 헤더검증 등등!<br>
@@ -180,26 +195,30 @@ pm<span class="token punctuation">.</span><span class="token function">test</spa
 <tbody></tbody>
 </table><h2 id="tips-다양한-response-body--구조에서-데이터-읽어오기">Tips!) 다양한 Response Body  구조에서 데이터 읽어오기</h2>
 <p>위의 경우 응답이 단순하지만, 단계로 구성된 경우는 상위 key 값을 이어서 적어주면 된다. 예를 들어 아래의 구조에서 message를 얻고싶다면 <code>pm.response.json().error.message</code> 이렇게 적으면 된다.</p>
-<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
-  <span class="token string">"error"</span> <span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token string">"code"</span> <span class="token punctuation">:</span> <span class="token string">"error-01"</span><span class="token punctuation">,</span>
-    <span class="token string">"message"</span> <span class="token punctuation">:</span> <span class="token string">"empty name"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
+
+```js
+{
+  "error" : {
+    "code" : "error-01",
+    "message" : "empty name"
+  }
+}
+```
 <p>만약 아래처럼 배열이 포함되어 있을 때, 두번째 에러 메시지를 불러오고 싶다면, <code>json().error[1].message</code> 이런식으로 숫자를 표시해주어야 한다.</p>
-<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
-  <span class="token string">"error"</span> <span class="token punctuation">:</span> <span class="token punctuation">[</span>
-	  <span class="token punctuation">{</span>
-	    <span class="token string">"code"</span> <span class="token punctuation">:</span> <span class="token string">"error-01"</span><span class="token punctuation">,</span>
-	    <span class="token string">"message"</span> <span class="token punctuation">:</span> <span class="token string">"empty name"</span>
-	  <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
-	    <span class="token string">"code"</span> <span class="token punctuation">:</span> <span class="token string">"error-02"</span><span class="token punctuation">,</span>
-	    <span class="token string">"message"</span> <span class="token punctuation">:</span> <span class="token string">"empty phoneNumber"</span>
-	  <span class="token punctuation">}</span>	  
-  <span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
-</code></pre>
+
+```js
+{
+  "error" : [
+	  {
+	    "code" : "error-01",
+	    "message" : "empty name"
+	  },{
+	    "code" : "error-02",
+	    "message" : "empty phoneNumber"
+	  }	  
+  ]
+}
+```
 <p>이렇게 포스트맨의 Tests 기능을 이용해 API 응답을 테스트하고 검증하는 방법을 적어보았다.</p>
 <p>눈으로 200 ok 를 보는것에 만족하지 않고, 데이터를 검증하는 테스트 구문만 살짝 추가하면 괜히 좀 멋있어보이는 테스트 결과를 볼 수 있다.</p>
 <p>하지만 아직 아쉬움이 있다.<br>
