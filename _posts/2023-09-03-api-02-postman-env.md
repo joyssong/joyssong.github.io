@@ -5,6 +5,7 @@ categories:
 tags:
  - [postman, 포스트맨, api테스트자동화]
 toc: true
+toc_sticky: true
 date: 2023-09-03T20:00:00+09:00
 
 ---
