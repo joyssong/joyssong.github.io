@@ -68,7 +68,14 @@ API 파일 하나하나가 아니라 컬렉션 폴더를 통째로 Export 해줘
 <h3 id="newman-명령어-입력하기">1) newman 명령어 입력하기</h3>
 <p>기본 포맷은 <code>newman run &lt;collection-file-source&gt; [options]</code> 이다.<br>
 수행할 collection 폴더, 거기서 수행할 파일, Environment, Global, IterationData, Report 등을 차례대로 추가해주면 된다.</p>
-
+<pre><code>newman run SwggerPetstore.postman_collection.json \
+--folder CreateUser \
+--environment petstore_stage.postman_environment.json \
+--globals workspace.postman_globals.json \
+--iteration-data petstore_user.csv \
+--reporters cli,htmlextra \
+--reporter-htmlextra-export "reports/report.html" 
+</code></pre>
 <p><strong>컬렉션은 필수값</strong>이지만 <strong>아래값은 모두 옵션값</strong>이다.</p>
 <p>내가 주로 사용하는 옵션에 대한 설명이다.<br>
 상세한 설명은 위의 npm-newman 에 적혀있으니 참고!</p>
@@ -106,7 +113,14 @@ newman-reporter-html, newman-reporter-htmlextra, xml 파일, junit report 등 �
 newman과 동일하게 npm으로 설치할 수 있다.<br>
 <code>npm install -g newman-reporter-htmlextra</code></p>
 <p>이후 위에 적었던 newman 명령어의 <code>--reporters</code> 에 <code>htmlextra</code> 을 추가하고, <code>--reporter-htmlextra-export "reports/report.html"</code> 을 추가하면 된다.</p>
-
+<pre><code>newman run SwggerPetstore.postman_collection.json \
+--folder CreateUser \
+--environment petstore_stage.postman_environment.json \
+--globals workspace.postman_globals.json \
+--iteration-data petstore_user.csv \
+--reporters cli,htmlextra \
+--reporter-htmlextra-export "reports/report.html" 
+</code></pre>
 <p><code>--reporters</code> :  생성할 레포트 파일 형식<br>
 <code>--reporter-htmlextra-export</code> :  htmlextra 라는 html report 를 생성해주고, 저장할 위치 + 이름 설정</p>
 <p>이렇게 수행하고나면 파일들을 모아두었던 폴더 하위에 reports 폴더가 생성되고, report.html 파일이 생성된다.<br>
