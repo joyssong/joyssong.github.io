@@ -67,8 +67,10 @@ date: 2023-09-03T22:30:00+09:00
 (단, csv는 , (쉼표) 로 데이터를 구분하니 데이터에 , 가 포함되면 안된다)</p>
 <p>Postman으로 돌아와 Body 옆의 <strong>Pre-request Script</strong>로 이동한다.<br>
 여기서 아래와 같이 입력한다.</p>
-<pre><code>pm.variables.set("username", JSON.stringify(pm.iterationData.get("username")))
-</code></pre>
+
+```js
+pm.variables.set("username", JSON.stringify(pm.iterationData.get("username")))
+```
 <p>나중에 Pre-request Script 및 pm.xxx에 대해 별도로 포스팅할 예정이다.</p>
 <p><code>pm</code> 은 postman 의 약자로 postman에서만 쓰이는 명령어이다.<br>
 보통 Body, Params 에 들어가는 변수를 variables로 칭한다.</p>
