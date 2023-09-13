@@ -1,5 +1,5 @@
 ---
-title: "Postman - 동적 변수 입력 : 오늘 날짜, Request Body에서 값 얻기 "
+title: "Postman - 동적 변수 입력 : 오늘 날짜, Request Body에서 값 얻기"
 categories:
  - API테스트자동화
 tags:
