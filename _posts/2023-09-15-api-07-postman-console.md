@@ -23,16 +23,17 @@ Java에서는 System.out.print.in(~) 주로 이 구문을 이용해 콘솔(혹�
 
 Postsman에서 콘솔을 켜는 방법은 2가지 이다. 
 
-1) 내부에 실행 - 왼쪽 하단에 Console 버튼 클릭  
-2) 외부에 실행 - 상단 View > Show Postman Console 클릭
+**1) 내부에 실행 - 왼쪽 하단에 Console 버튼 클릭**  
+**2) 외부에 실행 - 상단 View > Show Postman Console 클릭**
 
-내부에서 실행하면 아래와 같이 보인다.  
+내부에 실행하면 아래와 같이 보인다.  
 ![postman_console_01](/assets/images/postman_console_01.png)
 
-Request, Response와 함께 보여서 한 눈에 볼 수 있지만,   
-노트북에서는 한 화면에서 다 보기에 약간 부족하다.
+(아직 로그없음)  
+Request, Response와 함께 보이는 점은 좋지만,   
+노트북에서는 약간 작다.
 
-외부에서 실행하면 아래와 같이 별도의 창에서 보인다.   
+외부에 실행하면 아래와 같이 별도의 창에서 보인다.   
 ![postman_console_02](/assets/images/postman_console_02.png)
 
 ## Console 출력 방법 & Console 커맨드 종류
@@ -61,8 +62,8 @@ Postman에서 제공하는 옵션들을 해본 결과!
 
 콘솔도 마찬가지로 필요한 상황에 따라 입력하면 된다.
 
-* API Request 전, 무조건 출력하고 싶다면 > **Pre-request Script** 에 입력 
-* API Request 후, 결과에 따라 출력하고 싶다면 >  **Tests** 에 입력
+* **API Request 전, 호출 성공/실패 상관없이 출력하고 싶다면 > Pre-request Script 에 입력** 
+* **API Request 후, 결과에 따라 출력하고 싶다면 >  Tests 에 입력**
 
 
 
@@ -71,9 +72,11 @@ Postman에서 제공하는 옵션들을 해본 결과!
 
 ## Console 활용 방법
 
-API 테스트 자동화를 수행할 때, 수십~수백개의 호출을 날리므로 콘솔을 통해 각 tc를 구분해준다.
+Console.log 를 활용하는 방법은 무궁무진하다.  
+API 테스트 자동화를 수행할 때, 수십~수백개의 호출을 날리는데 이게 은근 구분하기 힘들다.  
+그래서 console.info 를 Pre-request Script에 적어주어 각 호출을 구분해준다.
 
-**Pre-request Script** 에는 수행할 TC 내용을 적어주고,   
+이런식으로 **Pre-request Script** 에는 수행할 TC 내용을 적어주고,   
 **Tests** 에는 수행한 결과를 바로 확인할 수 있는 주요 결과를 적어준다.   
 ![postman_console_05](/assets/images/postman_console_05.png)
 
@@ -83,7 +86,7 @@ API 테스트 자동화를 수행할 때, 수십~수백개의 호출을 날리�
 
 ## Console로 Request, Response 상세 확인하기
 
-보통 Reponse는 Postman 내에서 바로 볼 수 있지만,   
+보통 Reponse Body는 Postman 내에서 바로 볼 수 있지만,   
 실제 호출한 Request Body는 보기 어렵다.
 
 콘솔에서 `> POST http:// ~`을 클릭하면 상세 내용이 펼쳐진다.   
@@ -97,8 +100,8 @@ API 테스트 자동화를 수행할 때, 수십~수백개의 호출을 날리�
 Request가 길~다면 오른쪽 화살표를 클릭하면 단독 화면으로 볼 수 있다.  
 ![postman_console_08](/assets/images/postman_console_08.png)
 
-분명이 올바른게 작성했는데 당췌 왜 Fail이 발생하는가!  
-할 때,  콘솔의 Request Body를 꼼꼼히 살펴보면 대개 답이 나온다.   
+*"분명이 올바른게 작성했는데 당췌 왜 Fail이 발생하는가!"*   
+라는 생각이 들 때,  콘솔의 Request Body를 꼼꼼히 살펴보면 대개 답이 나온다.   
 String으로 들어가야하는게 그냥 들어갔다던가, 변수처리한게 제대로 안들어갔다던가 등등의 이유가 많다.
 
 
